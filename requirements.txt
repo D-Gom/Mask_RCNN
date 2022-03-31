@@ -3,9 +3,15 @@ scipy
 Pillow
 cython
 matplotlib
+<<<<<<< HEAD
 scikit-image==0.16.2
 tensorflow==2.2.0
 keras==2.3.1
+=======
+scikit-image
+tensorflow==1.13.1
+keras==2.0.8
+>>>>>>> 038a364f754fcefe0395499b9e19f77d1900bb03
 opencv-python
 h5py==2.10.0
 imgaug
