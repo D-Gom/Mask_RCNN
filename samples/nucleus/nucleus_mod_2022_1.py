@@ -209,7 +209,7 @@ class NucleusConfig(Config):
     NAME = "nucleus"
 
     # Adjust depending on your GPU memory
-    IMAGES_PER_GPU = 4
+    IMAGES_PER_GPU = 1
 
     # Number of classes (including background)
     NUM_CLASSES = 1 + 1  # Background + nucleus
@@ -396,16 +396,37 @@ def train(model, dataset_dir, subset):
     print("Train network heads")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=15,
+                epochs=10,
                 augmentation=augmentation,
                 layers='heads')
 
     print("Train all layers")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=30,
+                epochs=10,
                 augmentation=augmentation,
                 layers='all')
+
+    print("Train 3+ layers")
+    model.train(dataset_train, dataset_val,
+                learning_rate=config.LEARNING_RATE/2,
+                epochs=10,
+                augmentation=augmentation,
+                layers='3+')
+
+    print("Train 4+ layers")
+    model.train(dataset_train, dataset_val,
+                learning_rate=config.LEARNING_RATE/4,
+                epochs=5,
+                augmentation=augmentation,
+                layers='4+')
+
+    print("Train 5+ layers")
+    model.train(dataset_train, dataset_val,
+                learning_rate=config.LEARNING_RATE/10,
+                epochs=5,
+                augmentation=augmentation,
+                layers='5+')
 
 
 ############################################################
