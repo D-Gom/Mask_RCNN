@@ -2353,17 +2353,15 @@ class MaskRCNN():
         if not os.path.exists(self.log_dir + "/metrics"):
             os.makedirs(self.log_dir + "/metrics")
 
-        def lr_schedule(epoch, learning_rate):
+        def lr_schedule(epoch):
             tf.summary.scalar('learning rate', data=learning_rate, step=epoch)
             return learning_rate
-
         # Callbacks
         callbacks = [
             keras.callbacks.TensorBoard(log_dir=self.log_dir,
                                         histogram_freq=1, write_graph=True, write_images=False),
             keras.callbacks.ModelCheckpoint(self.checkpoint_path,
                                             verbose=0, save_weights_only=True),
-            keras.callbacks.LearningRateScheduler(lr_schedule),
         ]
 
         # Add custom callbacks to the list
