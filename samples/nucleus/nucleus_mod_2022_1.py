@@ -170,32 +170,58 @@ VAL_IMAGE_IDS = [
     "14305_500_f00048",
     "17642_500_f00001",
     "25741_500_f00051",
-    "consep_1",
-    "consep_8",
-    "crag_3",
-    "crag_14",
-    "crag_22",
-    "crag_36",
-    "crag_41",
-    "crag_58",
-    "crag_61",
-    "dpath_3",
-    "dpath_14",
-    "dpath_22",
-    "dpath_36",
-    "dpath_41",
-    "dpath_58",
-    "dpath_61",
-    "glas_3",
-    "glas_14",
-    "glas_22",
-    "glas_36",
-    "glas_41",
-    "glas_58",
-    "glas_61",
-    "pannuke_2",
-    "pannuke_12",
-    "pannuke_21",
+    "consep_1_01_01",
+    "consep_8_01_01",
+    "crag_3_01_01",
+    "crag_14_01_01",
+    "crag_22_01_01",
+    "crag_36_01_01",
+    "crag_41_01_01",
+    "crag_58_01_01",
+    "crag_61_01_01",
+    "dpath_3_01_01",
+    "dpath_14_01_01",
+    "dpath_22_01_01",
+    "dpath_36_01_01",
+    "dpath_41_01_01",
+    "dpath_58_01_01",
+    "dpath_61_01_01",
+    "glas_3_01_01",
+    "glas_14_01_01",
+    "glas_22_01_01",
+    "glas_36_01_01",
+    "glas_41_01_01",
+    "glas_58_01_01",
+    "glas_61_01_01",
+    "pannuke_2_01_01",
+    "pannuke_12_01_01",
+    "pannuke_21_01_01",
+    "consep_3_01_01",
+    "consep_5_01_01",
+    "crag_5_01_01",
+    "crag_17_01_01",
+    "crag_23_01_01",
+    "crag_38_01_01",
+    "crag_43_01_01",
+    "crag_59_01_01",
+    "crag_62_01_01",
+    "dpath_5_01_01",
+    "dpath_12_01_01",
+    "dpath_23_01_01",
+    "dpath_37_01_01",
+    "dpath_45_01_01",
+    "dpath_55_01_01",
+    "dpath_60_01_01",
+    "glas_5_01_01",
+    "glas_15_01_01",
+    "glas_25_01_01",
+    "glas_37_01_01",
+    "glas_43_01_01",
+    "glas_59_01_01",
+    "glas_62_01_01",
+    "pannuke_5_01_01",
+    "pannuke_16_01_01",
+    "pannuke_20_01_01",
 ]
 
 
@@ -209,13 +235,13 @@ class NucleusConfig(Config):
     NAME = "nucleus"
 
     # Adjust depending on your GPU memory
-    IMAGES_PER_GPU = 1
+    IMAGES_PER_GPU = 4
 
     # Number of classes (including background)
     NUM_CLASSES = 1 + 1  # Background + nucleus
 
     # Number of training and validation steps per epoch
-    STEPS_PER_EPOCH = (657 - len(VAL_IMAGE_IDS)) // IMAGES_PER_GPU
+    STEPS_PER_EPOCH = (1700 - len(VAL_IMAGE_IDS)) // IMAGES_PER_GPU
     VALIDATION_STEPS = max(1, len(VAL_IMAGE_IDS) // IMAGES_PER_GPU)
 
     # Don't exclude based on confidence. Since we have two classes
