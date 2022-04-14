@@ -422,35 +422,35 @@ def train(model, dataset_dir, subset):
     print("Train network heads")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=10,
+                epochs=8,
                 augmentation=augmentation,
                 layers='heads')
 
     print("Train all layers")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=10,
+                epochs=16,
                 augmentation=augmentation,
                 layers='all')
 
     print("Train 3+ layers")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE/2,
-                epochs=10,
+                epochs=24,
                 augmentation=augmentation,
                 layers='3+')
 
     print("Train 4+ layers")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE/4,
-                epochs=5,
+                epochs=29,
                 augmentation=augmentation,
                 layers='4+')
 
     print("Train 5+ layers")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE/10,
-                epochs=5,
+                epochs=34,
                 augmentation=augmentation,
                 layers='5+')
 
