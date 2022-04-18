@@ -42,6 +42,7 @@ import datetime
 import numpy as np
 import skimage.io
 from imgaug import augmenters as iaa
+import random
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../../")
@@ -67,14 +68,14 @@ RESULTS_DIR = os.path.join(ROOT_DIR, "results/nucleus/")
 # The dataset doesn't have a standard train/val split, so I picked
 # a variety of images to surve as a validation set.
 VAL_IMAGE_IDS = [
-    # "0d3640c1f1b80f24e94cc9a5f3e1d9e8db7bf6af7d4aba920265f46cadc25e37",
-    # "5c6eb9a47852754d4e45eceb9a696c64c7cfe304afc5ea491cdfef11d55c17f3",
-    # "bb61fc17daf8bdd4e16fdcf50137a8d7762bec486ede9249d92e511fcb693676",
-    # "e49fc2b4f1f39d481a6525225ab3f688be5c87f56884456ad54c953315efae83",
-    # "f7e5dcfc9c93183c668c5a4ab028d5faad54fb54298711f2caae0508aa978300",
-    # "2c61fdcb36fd1b2944895af6204279e9f6c164ba894198b40c8b7a3c9bf500ea",
-    # "c0f172831b8017c769ff0e80f85b096ac939e79de3d524e0826fbb95221365da",
-    # "eb1df8ed879d04b36980b0958a0e8fc446ad08c0bdcf3b5f42e3db023187c7e5",
+    "0d3640c1f1b80f24e94cc9a5f3e1d9e8db7bf6af7d4aba920265f46cadc25e37",
+    "5c6eb9a47852754d4e45eceb9a696c64c7cfe304afc5ea491cdfef11d55c17f3",
+    "bb61fc17daf8bdd4e16fdcf50137a8d7762bec486ede9249d92e511fcb693676",
+    "e49fc2b4f1f39d481a6525225ab3f688be5c87f56884456ad54c953315efae83",
+    "f7e5dcfc9c93183c668c5a4ab028d5faad54fb54298711f2caae0508aa978300",
+    "2c61fdcb36fd1b2944895af6204279e9f6c164ba894198b40c8b7a3c9bf500ea",
+    "c0f172831b8017c769ff0e80f85b096ac939e79de3d524e0826fbb95221365da",
+    "eb1df8ed879d04b36980b0958a0e8fc446ad08c0bdcf3b5f42e3db023187c7e5",
     # "0",
     # "5",
     # "8",
@@ -339,6 +340,10 @@ class NucleusDataset(utils.Dataset):
             image_ids = next(os.walk(dataset_dir))[1]
             if subset == "train":
                 image_ids = list(set(image_ids) - set(VAL_IMAGE_IDS))
+                print(image_ids)
+                random.shuffle(image_ids)
+                print(image_ids)
+
 
         # Add images
         for image_id in image_ids:
