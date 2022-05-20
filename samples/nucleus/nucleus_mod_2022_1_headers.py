@@ -274,8 +274,8 @@ class NucleusConfig(Config):
     # How many anchors per image to use for RPN training
     RPN_TRAIN_ANCHORS_PER_IMAGE = 64
 
-    # Image mean (RGB)
-    MEAN_PIXEL = np.array([43.53, 39.56, 48.22])
+    # Image mean (RGB) 194.65 155.78 202.46
+    MEAN_PIXEL = np.array([194.65, 155.78, 202.46])
 
     # If enabled, resizes instance masks to a smaller size to reduce
     # memory load. Recommended when using high-resolution images.
@@ -340,9 +340,9 @@ class NucleusDataset(utils.Dataset):
             image_ids = next(os.walk(dataset_dir))[1]
             if subset == "train":
                 image_ids = list(set(image_ids) - set(VAL_IMAGE_IDS))
-                print(image_ids)
+
                 random.shuffle(image_ids)
-                print(image_ids)
+
 
 
         # Add images

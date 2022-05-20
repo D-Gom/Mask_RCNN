@@ -172,55 +172,95 @@ VAL_IMAGE_IDS = [
     # "17642_500_f00001",
     # "25741_500_f00051",
     "consep_1_01_01",
+    "consep_3_01_01",
+    "consep_6_01_01",
     "consep_8_01_01",
     "crag_3_01_01",
+    "crag_8_01_01",
     "crag_14_01_01",
     "crag_22_01_01",
+    "crag_27_01_01",
+    "crag_30_01_01",
     "crag_36_01_01",
     "crag_41_01_01",
+    "crag_45_01_01",
+    "crag_50_01_01",
     "crag_58_01_01",
     "crag_61_01_01",
     "dpath_3_01_01",
+    "dpath_10_01_01",
     "dpath_14_01_01",
     "dpath_22_01_01",
+    "dpath_26_01_01",
+    "dpath_30_01_01",
     "dpath_36_01_01",
     "dpath_41_01_01",
+    "dpath_46_01_01",
+    "dpath_48_01_01",
     "dpath_58_01_01",
     "dpath_61_01_01",
     "glas_3_01_01",
+    "glas_10_01_01",
     "glas_14_01_01",
+    "glas_20_01_01",
     "glas_22_01_01",
+    "glas_30_01_02",
     "glas_36_01_01",
     "glas_41_01_01",
+    "glas_45_01_02",
+    "glas_50_01_01",
     "glas_58_01_01",
     "glas_61_01_01",
     "pannuke_2_01_01",
+    "pannuke_5_01_01",
     "pannuke_12_01_01",
+    "pannuke_15_01_01",
+    "pannuke_20_01_01",
     "pannuke_21_01_01",
     "consep_3_01_01",
+    "consep_4_01_01",
     "consep_5_01_01",
     "crag_5_01_01",
+    "crag_8_01_01",
+    "crag_10_01_01",
     "crag_17_01_01",
+    "crag_20_01_01",
     "crag_23_01_01",
+    "crag_28_01_01",
+    "crag_30_01_01",
     "crag_38_01_01",
+    "crag_340_01_01",
     "crag_43_01_01",
+    "crag_50_01_01",
+    "crag_55_01_01",
     "crag_59_01_01",
     "crag_62_01_01",
     "dpath_5_01_01",
     "dpath_12_01_01",
+    "dpath_15_01_01",
     "dpath_23_01_01",
+    "dpath_30_01_01",
     "dpath_37_01_01",
+    "dpath_40_01_01",
     "dpath_45_01_01",
+    "dpath_50_01_01",
     "dpath_55_01_01",
     "dpath_60_01_01",
     "glas_5_01_01",
+    "glas_10_01_01",
     "glas_15_01_01",
+    "glas_20_01_01",
     "glas_25_01_01",
+    "glas_30_01_01",
     "glas_37_01_01",
+    "glas_40_01_01",
     "glas_43_01_01",
+    "glas_50_01_01",
     "glas_59_01_01",
     "glas_60_01_01",
     "pannuke_5_01_01",
+    "pannuke_8_01_02",
+    "pannuke_10_01_02",
     "pannuke_16_01_01",
     "pannuke_20_01_01",
 ]
@@ -274,8 +314,8 @@ class NucleusConfig(Config):
     # How many anchors per image to use for RPN training
     RPN_TRAIN_ANCHORS_PER_IMAGE = 64
 
-    # Image mean (RGB)
-    MEAN_PIXEL = np.array([43.53, 39.56, 48.22])
+    # Image mean (RGB) 194.65 155.78 202.46
+    MEAN_PIXEL = np.array([194.65, 155.78, 202.46])
 
     # If enabled, resizes instance masks to a smaller size to reduce
     # memory load. Recommended when using high-resolution images.
@@ -340,9 +380,9 @@ class NucleusDataset(utils.Dataset):
             image_ids = next(os.walk(dataset_dir))[1]
             if subset == "train":
                 image_ids = list(set(image_ids) - set(VAL_IMAGE_IDS))
-                print(image_ids)
+
                 random.shuffle(image_ids)
-                print(image_ids)
+
 
 
         # Add images
@@ -427,37 +467,37 @@ def train(model, dataset_dir, subset):
     print("Train network heads")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=8,
+                epochs=12,
                 augmentation=augmentation,
                 layers='heads')
 
     print("Train all layers")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=16,
+                epochs=30,
                 augmentation=augmentation,
                 layers='all')
 
-    print("Train 3+ layers")
-    model.train(dataset_train, dataset_val,
-                learning_rate=config.LEARNING_RATE/2,
-                epochs=24,
-                augmentation=augmentation,
-                layers='3+')
-
-    print("Train 4+ layers")
-    model.train(dataset_train, dataset_val,
-                learning_rate=config.LEARNING_RATE/4,
-                epochs=29,
-                augmentation=augmentation,
-                layers='4+')
-
-    print("Train 5+ layers")
-    model.train(dataset_train, dataset_val,
-                learning_rate=config.LEARNING_RATE/10,
-                epochs=34,
-                augmentation=augmentation,
-                layers='5+')
+    # print("Train 3+ layers")
+    # model.train(dataset_train, dataset_val,
+    #             learning_rate=config.LEARNING_RATE/2,
+    #             epochs=24,
+    #             augmentation=augmentation,
+    #             layers='3+')
+    #
+    # print("Train 4+ layers")
+    # model.train(dataset_train, dataset_val,
+    #             learning_rate=config.LEARNING_RATE/4,
+    #             epochs=29,
+    #             augmentation=augmentation,
+    #             layers='4+')
+    #
+    # print("Train 5+ layers")
+    # model.train(dataset_train, dataset_val,
+    #             learning_rate=config.LEARNING_RATE/10,
+    #             epochs=34,
+    #             augmentation=augmentation,
+    #             layers='5+')
 
 
 ############################################################

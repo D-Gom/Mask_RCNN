@@ -2063,6 +2063,11 @@ class MaskRCNN():
 
         return model
 
+    def call(self, x):
+        outputs = self.dense(x)
+        tf.summary.histogram('outputs', outputs)
+        return outputs
+
     def find_last(self):
         """Finds the last checkpoint file of the last trained model in the
         model directory.
