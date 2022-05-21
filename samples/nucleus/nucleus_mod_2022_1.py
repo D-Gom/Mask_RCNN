@@ -327,7 +327,7 @@ class NucleusConfig(Config):
     # enough positive proposals to fill this and keep a positive:negative
     # ratio of 1:3. You can increase the number of proposals by adjusting
     # the RPN NMS threshold.
-    TRAIN_ROIS_PER_IMAGE = 512
+    TRAIN_ROIS_PER_IMAGE = 256
 
     # Maximum number of ground truth instances to use in one image
     MAX_GT_INSTANCES = 200
