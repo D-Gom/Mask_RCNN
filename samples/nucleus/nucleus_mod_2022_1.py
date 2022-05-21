@@ -327,7 +327,7 @@ class NucleusConfig(Config):
     # enough positive proposals to fill this and keep a positive:negative
     # ratio of 1:3. You can increase the number of proposals by adjusting
     # the RPN NMS threshold.
-    TRAIN_ROIS_PER_IMAGE = 128
+    TRAIN_ROIS_PER_IMAGE = 512
 
     # Maximum number of ground truth instances to use in one image
     MAX_GT_INSTANCES = 200
@@ -456,7 +456,7 @@ def train(model, dataset_dir, subset):
         iaa.OneOf([iaa.Affine(rotate=90),
                    iaa.Affine(rotate=180),
                    iaa.Affine(rotate=270)]),
-        iaa.Multiply((0.8, 1.5)),
+        iaa.Multiply((0.5, 2)),
         iaa.GaussianBlur(sigma=(0.0, 5.0))
     ])
 
